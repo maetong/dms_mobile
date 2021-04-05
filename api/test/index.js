@@ -1,7 +1,7 @@
 import Http from "@/common/http.js";
 
 export const AjaxScrollData = params =>
-  Http.get("https://mock.yonyoucloud.com/mock/3597/testScrollData", params, {
+  Http.get("/mock/3597/testScrollData", params, {
     isLoading: false
   });
 
