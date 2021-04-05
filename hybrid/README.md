@@ -1,4 +1,4 @@
-# my-project
+# estock-mob
 
 ## Project setup
 ```

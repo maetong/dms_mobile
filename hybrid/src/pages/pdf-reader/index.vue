@@ -28,7 +28,7 @@ export default {
         return;
       }
       const pdfurl = require(`../../assets/pdf/${pdfName}.pdf`);
-      const pdfBlob = this.$util.dataURItoBlob(pdfurl.default);
+      const pdfBlob = this.$util.dataURItoBlob(pdfurl);
       const pdfArrbuff = await this.$util.blobToArrayBuffer(pdfBlob);
       this.pdfh5 = new Pdfh5("#pdf-demo", {
         data: pdfArrbuff,

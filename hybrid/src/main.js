@@ -1,39 +1,23 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-
-import Vant from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Vant);
-
-Vue.config.productionTip = false;
-
-// 绑定配置
+import Vant from "vant";
+import "vant/lib/index.css";
 import AppConfig from "@/config/index.js";
-Vue.prototype.$appConfig = AppConfig;
-
-// 绑定公共方法
-import Util from "@/common/util.js";
-Vue.prototype.$util = Util;
-
+import Util from "@/common/utils";
 import moment from "moment";
-Vue.prototype.$moment = moment;
+import { Toast } from "vant";
 
-Vue.prototype.$sleep = timeout => {
-  return new Promise((resolve, resject) => {
-    setTimeout(() => {
-      resolve();
-    }, timeout);
-  });
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.use(Vant);
+app.config.globalProperties.$appConfig = AppConfig;
+app.config.globalProperties.$util = Util;
+app.config.globalProperties.$moment = moment;
+app.config.globalProperties.$sleep = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
 };
-
-
-import { Toast } from 'vant';
-Vue.prototype.$toast = Toast
-
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+app.config.globalProperties.$toast = Toast;
+app.mount("#app");

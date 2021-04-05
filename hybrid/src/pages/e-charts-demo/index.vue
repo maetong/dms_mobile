@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import echarts from "echarts";
+const echarts = require("echarts");
+
 export default {
   name: "e-charts-demo",
   beforeMount() {

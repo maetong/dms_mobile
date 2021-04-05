@@ -4,16 +4,13 @@
  */
 const devConfig = {
   requsetUrl: "http://127.0.0.1:7001", // 请求地址
-  webUrl: "" // h5页面 地址
 };
 
 //生产环境
 const proConfig = {
-  requsetUrl: "http://vpn.zoujie16.cn:7001",
-  webUrl: ""
+  requsetUrl: "https://s.zhoujie16.cn",
 };
 
 let config = devConfig;
-// let config = proConfig;
 
 module.exports = config;
