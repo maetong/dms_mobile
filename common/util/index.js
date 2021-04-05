@@ -86,6 +86,28 @@ class Util {
       url: '/pages/web-view-page/web-view-page?url=' + encodeURIComponent(url)
     });
   }
+  // 禁止表情
+  inputEmoji(value) {
+    const regex = emojiRegex();
+    return value.replace(regex, "");
+  }
+
+  getSafeAreaBottom() {
+    return AppConfig.systemInfo.safeAreaInsets.bottom + "px";
+  }
+
+  // px 单位转 rpx
+  pxTpRpx(px) {
+    px = Number(px);
+    const windowWidth = uni.getSystemInfoSync().windowWidth;
+    return (px / windowWidth) * 750;
+  }
+  // rpx 单位转 px
+  rpxToPx(rpx) {
+    rpx = Number(rpx);
+    const windowWidth = uni.getSystemInfoSync().windowWidth;
+    return (rpx / 750) * windowWidth;
+  }
 }
 
 export default new Util();

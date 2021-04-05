@@ -21,7 +21,7 @@ export default {
     return {
       btnList: [
         {
-          title: 'm-page',
+          title: 'm-page 基础页面',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-page'
@@ -29,7 +29,7 @@ export default {
           }
         },
         {
-          title: 'm-button',
+          title: 'm-button 按钮',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-button'
@@ -38,7 +38,7 @@ export default {
         },
         //m-license
         {
-          title: 'm-license',
+          title: 'm-license 车牌输入',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-license'
@@ -47,16 +47,24 @@ export default {
         },
         // search-filter
         {
-          title: 'search-filter',
+          title: 'search-filter 筛选',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/search-filter'
             });
           }
         },
+        {
+          title: 'base-scroll 下拉刷新下拉加载',
+          clickFn: async () => {
+            const [err, res] = await uni.navigateTo({
+              url: '/pages/demo/ui-demo/base-scroll-demo'
+            });
+          }
+        },
         // m-label
         {
-          title: 'm-label',
+          title: 'm-label 单元格',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-label'
@@ -65,7 +73,7 @@ export default {
         },
         // m-textarea
         {
-          title: 'm-textarea',
+          title: 'm-textarea 文本域',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-textarea'
@@ -74,34 +82,23 @@ export default {
         },
         // m-checkbox
         {
-          title: 'm-checkbox',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/m-checkbox'
-            });
-          }
-        },
-        // m-checkbox-panel
-        {
-          title: 'm-checkbox-panel',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/m-checkbox-panel'
-            });
-          }
-        },
-        // m-picker
-        {
-          title: 'm-picker',
+          title: 'm-picker 选择',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-picker'
             });
           }
         },
-        // validator
         {
-          title: 'validator',
+          title: 'm-picker 时间选择',
+          clickFn: async () => {
+            const [err, res] = await uni.navigateTo({
+              url: '/pages/demo/ui-demo/date-time-select'
+            });
+          }
+        },
+        {
+          title: 'validator 表单校验',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/validator'
@@ -110,7 +107,7 @@ export default {
         },
         // m-swipe-cell
         {
-          title: 'm-swipe-cell',
+          title: 'm-swipe-cell 滑动单元格',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-swipe-cell'
@@ -119,7 +116,7 @@ export default {
         },
         // m-dialog
         {
-          title: 'm-dialog',
+          title: 'm-dialog 弹窗',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-dialog'
@@ -128,7 +125,7 @@ export default {
         },
         // swiper-tab
         {
-          title: 'swiper-tab',
+          title: 'swiper-tab 标签页',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/swiper-tab'
@@ -137,7 +134,7 @@ export default {
         },
         // m-vehicle-check-cell
         {
-          title: 'm-vehicle-check-cell',
+          title: 'm-vehicle-check-cell 车辆检查单元格',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/m-vehicle-check-cell'
@@ -146,7 +143,7 @@ export default {
         },
         // doc-reader
         {
-          title: 'doc-reader',
+          title: 'doc-reader 文档阅读',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/doc-reader'
@@ -154,93 +151,21 @@ export default {
           }
         },
         {
-          title: '输入框',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/form'
-            });
-          }
-        },
-        {
-          title: 'Cell 单元格',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/cell'
-            });
-          }
-        },
-        {
-          title: '选择',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/select'
-            });
-          }
-        },
-        {
-          title: '字典Demo',
+          title: 'dict 字典',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/dict'
             });
           }
         },
-        {
-          title: '日期时间选择',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/date-time-select'
-            });
-          }
-        },
-        {
-          title: '参数校验',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/validator'
-            });
-          }
-        },
-        {
-          title: '虚拟键盘',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/keyboard'
-            });
-          }
-        },
         // {
-        //   title: 'list',
+        //   title: '语音识别',
         //   clickFn: async () => {
         //     const [err, res] = await uni.navigateTo({
-        //       url: '/pages/demo/ui-demo/list'
+        //       url: '/pages/demo/ui-demo/speech'
         //     });
         //   }
         // },
-        {
-          title: '头部表单筛选',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/search-filter'
-            });
-          }
-        },
-        {
-          title: '弹窗交互',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/dialog'
-            });
-          }
-        },
-        {
-          title: '语音识别',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/speech'
-            });
-          }
-        },
         {
           title: '原生导航-固定配置',
           clickFn: async () => {
@@ -258,30 +183,6 @@ export default {
           }
         },
         {
-          title: 'tabs',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/tabs'
-            });
-          }
-        },
-        {
-          title: '左滑列表',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/swipeActionItem'
-            });
-          }
-        },
-        {
-          title: '车辆检查项',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/check-item'
-            });
-          }
-        },
-        {
           title: 'e-charts-H5',
           clickFn: async () => {
             this.$util.openLocalWeb({
@@ -294,7 +195,7 @@ export default {
           clickFn: async () => {
             uni.navigateTo({
               url: '/pages/demo/ui-demo/e-charts-demo'
-            })
+            });
           }
         },
         {
@@ -306,22 +207,13 @@ export default {
           }
         },
         {
-          title: '文档阅读器',
-          clickFn: async () => {
-            const [err, res] = await uni.navigateTo({
-              url: '/pages/demo/ui-demo/doc-reader'
-            });
-          }
-        },
-        // 文件上传 pages/demo/ui-demo/upload-file
-        {
           title: '文件上传',
           clickFn: async () => {
             const [err, res] = await uni.navigateTo({
               url: '/pages/demo/ui-demo/upload-file'
             });
           }
-        },
+        }
       ]
     };
   },

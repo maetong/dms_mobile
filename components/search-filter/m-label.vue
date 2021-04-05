@@ -2,26 +2,43 @@
   <view class="m-label">
     <view class="m-label__inner" :class="{ 'm-label__inner--border': border }">
       <view v-if="icon" class="m-label__icon m-label__icon-left">
-        <image class="m-label__icon-img" :src="icon" mode="scaleToFill"></image>
+        <image
+          class="m-label__icon-img"
+          :style="{ width: iconSize + 'rpx', height: iconSize + 'rpx' }"
+          :src="icon"
+          mode="scaleToFill"
+        ></image>
       </view>
-      <view class="m-label__title" :class="{ 'm-label__title--required': required }">
-        {{ label }}
+      <view
+        class="m-label__title"
+        :class="{ 'm-label__title--required': required }"
+        :style="{ flex: '0 0 ' + labelWidth }"
+      >
+        <view>{{ label }}</view>
+        <slot name="sublabel"></slot>
       </view>
-      <view class="m-label_content">
+      <view class="m-label_content" @click="$emit('labelClick')">
         <slot name="default"></slot>
         <slot name="after"></slot>
       </view>
       <view v-if="unit" class="m-label__unit">{{ unit }}</view>
       <view v-if="rightIcon" @click="rightIconClick" class="m-label__icon m-label__icon-right">
-        <image class="m-label__icon-img" :src="rightIcon" mode="scaleToFill"></image>
+        <image
+          class="m-label__icon-img"
+          :src="rightIcon"
+          :style="{ width: iconSize + 'rpx', height: iconSize + 'rpx' }"
+          mode="scaleToFill"
+        ></image>
       </view>
-      <view v-if="isLink" class="m-label__link"><text class="m-iconfont">&#xe71a;</text></view>
+      <view v-if="isLink" class="m-label__link">
+        <uni-icons type="arrowright" size="12" color="#333"></uni-icons>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-// 未完成功能 左 右 侧自定义 
+// 未完成功能 左 右 侧自定义
 export default {
   name: 'm-label',
   mounted() {
@@ -38,11 +55,15 @@ export default {
     },
     border: {
       type: Boolean,
-      default: true
+      default: false
     },
     icon: {
       type: String,
       default: ''
+    },
+    iconSize: {
+      type: Number,
+      default: 40
     },
     isLink: {
       type: Boolean,
@@ -55,6 +76,10 @@ export default {
     rightIcon: {
       type: String,
       default: ''
+    },
+    labelWidth: {
+      type: String,
+      default: '240rpx'
     }
   },
   data() {
@@ -72,7 +97,7 @@ export default {
 .m-label {
   background-color: #ffffff;
   color: #333;
-  font-size: 30rpx;
+  font-size: 26rpx;
   padding: 0 30rpx;
   .m-label__inner {
     position: relative;
@@ -93,23 +118,26 @@ export default {
     .m-label__icon {
       &.m-label__icon-left {
         padding-right: 16rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       &.m-label__icon-right {
         padding-left: 16rpx;
       }
       .m-label__icon-img {
-        width: 54rpx;
-        height: 54rpx;
+        // width: 54rpx;
+        // height: 54rpx;
       }
     }
     .m-label__title {
       position: relative;
-      flex: 0 0 200rpx;
+      // flex: 0 0 240rpx;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      height: 100rpx;
+      height: 80rpx; //默认100rpx
       &.m-label__title--required::before {
         content: '*';
         display: inline-block;
@@ -125,6 +153,7 @@ export default {
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
+      height: 80rpx;
     }
     .m-label__unit {
       padding-left: 4rpx;

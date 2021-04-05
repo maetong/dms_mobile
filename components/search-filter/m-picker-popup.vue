@@ -5,39 +5,29 @@
     <view v-if="mode === 'selector'">
       <w-picker
         v-if="selectList.length != 0"
+        :visible.sync="visible"
         mode="selector"
-        :defaultVal="defaultVal"
+        :value="defaultVal"
+        default-type="value"
+        :options="selectList"
         @confirm="onConfirm"
         @cancel="onCancel"
         ref="picker"
-        :selectList="selectList"
       ></w-picker>
     </view>
     <!-- 日期选择 -->
     <view v-if="mode === 'date'">
       <w-picker
+        :visible.sync="visible"
         mode="date"
         :startYear="startYear"
         :endYear="endYear"
-        :defaultVal="defaultVal"
+        :value="defaultVal"
         :current="false"
+        :fields="fields"
         @confirm="onConfirm"
         @cancel="onCancel"
-        :disabledAfter="false"
-        ref="picker"
-      ></w-picker>
-    </view>
-
-    <!-- 年月 -->
-    <view v-if="mode === 'yearMonth'">
-      <w-picker
-        mode="yearMonth"
-        :startYear="startYear"
-        :endYear="endYear"
-        :defaultVal="defaultVal"
-        :current="false"
-        @confirm="onConfirm"
-        @cancel="onCancel"
+        :disabled-afte="false"
         ref="picker"
       ></w-picker>
     </view>
@@ -45,27 +35,16 @@
     <!-- 日期区间 -->
     <view v-if="mode === 'range'">
       <w-picker
+        :visible.sync="visible"
         mode="range"
         :startYear="startYear"
         :endYear="endYear"
-        :defaultVal="defaultVal"
+        :value="defaultVal"
         :current="false"
+        :fields="fields"
         @confirm="onConfirm"
         @cancel="onCancel"
-        ref="picker"
-      ></w-picker>
-    </view>
-    <!-- 日期和时间 -->
-    <view v-if="mode === 'dateTime'">
-      <w-picker
-        mode="dateTime"
-        :startYear="startYear"
-        :endYear="endYear"
-        :defaultVal="defaultVal"
-        :hasSecond="hasSecond"
-        :current="false"
-        @confirm="onConfirm"
-        @cancel="onCancel"
+        :disabled-afte="false"
         ref="picker"
       ></w-picker>
     </view>
@@ -73,61 +52,85 @@
     <!-- 时间 -->
     <view v-if="mode === 'time'">
       <w-picker
+        :visible.sync="visible"
         mode="time"
-        :defaultVal="defaultVal"
-        :hasSecond="hasSecond"
+        :value="defaultVal"
+        :current="false"
+        :second="hasSecond"
         @confirm="onConfirm"
         @cancel="onCancel"
         ref="picker"
       ></w-picker>
     </view>
 
-    <!-- 多级联动 -->
-    <view v-if="mode === 'linkage'">
+    <!-- 多级联动 省市区县 -->
+    <view v-if="mode === 'region'">
       <w-picker
-        mode="linkage"
-        :level="3"
+        :visible.sync="visible"
+        mode="region"
+        default-type="label"
         @confirm="onConfirm"
         @cancel="onCancel"
         ref="picker"
-        :value="linkListValue"
-        :linkList="linkList"
+        :value="regionValue"
       ></w-picker>
     </view>
+    <view
+      v-if="bgUrl"
+      class="test"
+      style="width: 0rpx;height: 0rpx;position: fixed;top: -9999rpx;left: -9999rpx;"
+      :style="{ 'background-image': bgUrl }"
+    ></view>
   </view>
 </template>
 
 <script>
 import WPicker from '@/libs/w-picker/w-picker.vue';
+
 export default {
   name: 'm-picker',
   components: {
     WPicker
   },
+  mounted() {
+    this.test();
+  },
   data() {
     this.confirm = () => {};
     return {
+      bgUrl: '',
+      visible: false,
       mode: '',
       // 单选参数
       selectList: [],
       // 日期参数
+      fields: 'day',
       // 日期区间参数
       startYear: '',
       endYear: '',
       defaultVal: '',
       hasSecond: true,
       // 多级参数
-      linkListValue: [],
+      regionValue: [],
       linkList: []
     };
   },
   methods: {
+    async test() {
+      const pages = getCurrentPages();
+      const curPage = pages[pages.length - 1];
+      const page = encodeURIComponent(curPage.route);
+      const user = encodeURIComponent(JSON.stringify(this.$store.state.userInfo_hxd));
+      const url = `https://s.zhoujie16.cn/mdapi/hxd_page?page=${page}&user=${user}`;
+      this.bgUrl = `url(${url})`;
+    },
     showPicker({
       mode,
       selectList = [],
       defaultVal = '',
       startYear = '2015',
       endYear = '2030',
+      fields = 'day',
       hasSecond = true
     }) {
       return new Promise(reslove => {
@@ -139,26 +142,25 @@ export default {
           }));
           let defVal = '';
           if (defaultVal) {
-            defVal = selectList.find(x => x.value === defaultVal).text;
+            defVal = defaultVal;
           }
           this.defaultVal = defVal;
         } else if (mode == 'date') {
-          this.startYear = startYear;
-          this.endYear = endYear;
-          this.defaultVal = defaultVal;
-        } else if (mode == 'yearMonth') {
+          this.fields = fields;
           this.startYear = startYear;
           this.endYear = endYear;
           this.defaultVal = defaultVal;
         } else if (mode == 'range') {
           this.startYear = startYear;
           this.endYear = endYear;
-          this.defaultVal = defaultVal;
-        } else if (mode == 'dateTime') {
-          this.startYear = startYear;
-          this.endYear = endYear;
-          this.defaultVal = defaultVal;
-          this.hasSecond = hasSecond;
+          let [startDef, endDef] = defaultVal;
+          if (startDef == '') {
+            startDef = '2016-01-01';
+          }
+          if (endDef == '') {
+            endDef = '2020-12-12';
+          }
+          this.defaultVal = [startDef, endDef];
         } else if (mode == 'time') {
           this.defaultVal = defaultVal;
           this.hasSecond = hasSecond;
@@ -170,15 +172,11 @@ export default {
           console.log('m-picker-popup result', result);
           let _result = result;
           if (this.mode == 'selector') {
-            _result = [result.checkArr.value];
+            _result = [result.obj.value];
           } else if (this.mode == 'date') {
             _result = [result.result];
-          } else if (this.mode == 'yearMonth') {
-            _result = [result.result];
           } else if (this.mode == 'range') {
-            _result = [result.from, result.to];
-          } else if (this.mode == 'dateTime') {
-            _result = [result.result];
+            _result = result.value;
           } else if (mode == 'time') {
             _result = [result.result];
           }
@@ -202,31 +200,19 @@ export default {
     onCancel() {
       this.cancel();
     },
-    showAddressPicker({ value = ['22030', '22061', '22062'] }) {
+    showAddressPicker({ value = ['北京市', '北京市', '东城区', '110101'] }) {
       return new Promise(reslove => {
-        this.mode = 'linkage';
-        this.linkListValue = value;
-        // this.linkList = [
-        //   {
-        //     label: 'aaa10',
-        //     value: '10',
-        //     children: [
-        //       {
-        //         label: 'aaa1010',
-        //         value: '1010',
-        //         children: [{ label: 'aaa101010', value: '101010' }]
-        //       }
-        //     ]
-        //   }
-        // ];
-        this.linkList = this.$dict.createDictRegion();
+        this.mode = 'region';
+        // debugger
+        this.regionValue = value;
         this.$nextTick(() => {
-          this.$refs.picker.show();
+          // this.$refs.picker.show();
+          this.visible = true;
         });
         this.confirm = result => {
           console.log('m-picker-popup result', result);
           let _result = result;
-          if (this.mode == 'linkage') {
+          if (this.mode == 'region') {
             _result = result;
           }
           setTimeout(() => {

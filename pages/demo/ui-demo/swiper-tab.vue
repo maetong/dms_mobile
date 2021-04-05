@@ -1,30 +1,12 @@
 <template>
   <MPage ref="MPage">
-    <SwiperTab 
-      :height="swiperTabHeight" 
-      :tabs="tabs" 
-      :curIndex="curIndex" 
-      @change="changeTab"
-    >
-      <swiper 
-        style="height: 100%;" 
-        class="swiper-wrap" 
-        :current="curIndex" 
-        @change="swiperChange"
-      >
-      
-        <swiper-item>
-          <view class="demo-page page-0">0</view>
-        </swiper-item>
-        
-        <swiper-item>
-          <view class="demo-page page-1">1</view>
-        </swiper-item>
-        
-        <swiper-item>
-          <view class="demo-page page-2">2</view>
-        </swiper-item>
-        
+    <SwiperTab :height="swiperTabHeight" :tabs="tabs" :curIndex="curIndex" @change="changeTab">
+      <swiper style="height: 100%;" class="swiper-wrap" :current="curIndex" @change="swiperChange">
+        <swiper-item><view class="demo-page page-0">0</view></swiper-item>
+
+        <swiper-item><view class="demo-page page-1">1</view></swiper-item>
+
+        <swiper-item><view class="demo-page page-2">2</view></swiper-item>
       </swiper>
     </SwiperTab>
   </MPage>
@@ -45,7 +27,7 @@ export default {
       const current = e.detail.current;
       this.changeTab(current);
       // curIndex = 2 的页面不允许进入
-      if (current === 2) { 
+      if (current === 2) {
         this.$nextTick(() => {
           this.changeTab(current - 1);
         });

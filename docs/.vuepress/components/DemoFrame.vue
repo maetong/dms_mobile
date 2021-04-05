@@ -1,5 +1,6 @@
 <template>
   <div class="demo-frame">
+    <div style="position: absolute;background: #FFF;" >{{src}}</div>
     <iframe
       class="demo-frame_inner"
       :src="srcUrl"
@@ -28,7 +29,8 @@ export default {
   mounted() {},
   data() {
     return {
-      baseUrl: 'http://dms-mob-demo.zhoujie16.cn/#/pages/demo/ui-demo'
+      // baseUrl: 'http://dms-mob-demo.zhoujie16.cn/#/pages/demo/ui-demo'
+      baseUrl: 'http://localhost:8081/dms-mob-demo/#/pages/demo/ui-demo'
     };
   },
   methods: {}

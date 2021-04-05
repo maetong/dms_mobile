@@ -29,6 +29,16 @@
     >
       内容
     </MLabel>
+    <!-- 自定义插槽 -->
+    <view class="m-break-space">自定义插槽</view>
+    <MLabel label="商品租金" labelWidth="400rpx">
+      <template v-slot:sublabel>
+        <view style="color: #ff7b25;font-size: 20rpx;">（副标题）</view>
+      </template>
+      <template v-slot:default>
+        <view style="color: #ff7b25;">自定义内容</view>
+      </template>
+    </MLabel>
   </MPage>
 </template>
 

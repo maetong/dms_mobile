@@ -1,8 +1,6 @@
 <template>
   <view class="m-page-wrap" :class="type">
-    <view class="m-page-inner">
-      <slot name="default"></slot>
-    </view>
+    <view class="m-page-inner"><slot name="default"></slot></view>
     <view class="m-page-popup-group">
       <MPickerPopup ref="MPickerPopup"></MPickerPopup>
       <MCheckboxPopup ref="MCheckboxPopup"></MCheckboxPopup>
@@ -35,7 +33,14 @@ export default {
     this.MActionSheet = this.$refs.MActionSheet;
     this.MKeyboard = this.$refs.MKeyboard;
   },
-  methods: {}
+  methods: {
+    showLoading() {
+      this.$refs.MLoading.showLoading();
+    },
+    hideLoading() {
+      this.$refs.MLoading.hideLoading();
+    }
+  }
 };
 </script>
 

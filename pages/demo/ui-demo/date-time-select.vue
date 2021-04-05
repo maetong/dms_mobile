@@ -4,8 +4,18 @@
     <view class="m-break-space">日期选择</view>
     <!-- 日期选择 -->
     <MPicker label="日期选择" mode="date" v-model="formData.value_date_nomal"></MPicker>
-    <MPicker label="日期选择 必填" mode="date" required v-model="formData.value_date_required"></MPicker>
-    <MPicker label="日期选择 只读" mode="date" readonly v-model="formData.value_date_readonly"></MPicker>
+    <MPicker
+      label="日期选择 必填"
+      mode="date"
+      required
+      v-model="formData.value_date_required"
+    ></MPicker>
+    <MPicker
+      label="日期选择 只读"
+      mode="date"
+      readonly
+      v-model="formData.value_date_readonly"
+    ></MPicker>
 
     <view class="m-break-space">日期范围选择</view>
     <!-- 日期范围选择 -->
@@ -15,9 +25,9 @@
     <view style="padding: 20rpx;">
       <m-button class="demo-btn" block @click.native="showPicker_date">选择日期</m-button>
       <m-button class="demo-btn" block @click.native="showPicker_yearMonth">选择年月</m-button>
-      <m-button class="demo-btn" block @click.native="showPicker_range">选择日期范围</m-button>
       <m-button class="demo-btn" block @click.native="showPicker_dateTime">选择日期时间</m-button>
       <m-button class="demo-btn" block @click.native="showPicker_time">选择时间</m-button>
+      <m-button class="demo-btn" block @click.native="showPicker_range">选择日期范围</m-button>
     </view>
   </MPage>
 </template>
@@ -44,6 +54,7 @@ export default {
      * 日期选择
      * 入参:
      * mode: 'date'
+     * fields 'day' 颗粒度:year、day、month、hour、minute、second
      * startYear  开始年份 默认2015
      * endYear  结束年份 默认2030
      * defaultVal  默认值
@@ -53,6 +64,7 @@ export default {
     async showPicker_date() {
       const res = await this.SHOW_TIME_PICKER({
         mode: 'date',
+        fields: 'day',
         startYear: '2015',
         endYear: '2021',
         defaultVal: '2020-02-02'
@@ -62,21 +74,29 @@ export default {
     },
     /**
      * 年月选择
-     * 入参:
-     * mode: 'yearMonth'
-     * startYear  开始年份 默认2015
-     * endYear  结束年份 默认2030
-     * defaultVal  默认值
-     * 出参:
-     *   eg: ['2020-02']
-     *
      */
     async showPicker_yearMonth() {
       const res = await this.SHOW_TIME_PICKER({
-        mode: 'yearMonth',
+        mode: 'date',
+        fields: 'month',
         startYear: '2015',
         endYear: '2021',
         defaultVal: '2020-01'
+      });
+      console.log(res);
+      this.SHOW_TOAST(JSON.stringify(res));
+    },
+
+    /**
+     * 日期和时间
+     */
+    async showPicker_dateTime() {
+      const res = await this.SHOW_TIME_PICKER({
+        mode: 'date',
+        fields: 'second',
+        startYear: '2015',
+        endYear: '2021',
+        defaultVal: '2020-02-02 02:02:02'
       });
       console.log(res);
       this.SHOW_TOAST(JSON.stringify(res));
@@ -102,28 +122,6 @@ export default {
       this.SHOW_TOAST(JSON.stringify(res));
     },
     /**
-     * 日期和时间
-     * 入参:
-     * mode: 'dateTime'
-     * startYear
-     * endYear
-     * defaultVal
-     * hasSecond  是否显示秒  默认true
-     * 出参:
-     *    ["2020-02-02 02:02:02"]
-     */
-    async showPicker_dateTime() {
-      const res = await this.SHOW_TIME_PICKER({
-        mode: 'dateTime',
-        startYear: '2015',
-        endYear: '2021',
-        defaultVal: '2020-02-02 02:02:02',
-        hasSecond: false
-      });
-      console.log(res);
-      this.SHOW_TOAST(JSON.stringify(res));
-    },
-    /**
      * 时间选择
      * 入参:
      * mode: 'time'
@@ -135,7 +133,7 @@ export default {
       const res = await this.SHOW_TIME_PICKER({
         mode: 'time',
         defaultVal: '12:12:12',
-        hasSecond: false
+        hasSecond: true
       });
       console.log(res);
       this.SHOW_TOAST(JSON.stringify(res));

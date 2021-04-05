@@ -18,6 +18,15 @@ pageClass: demo-page
 | unit      | String  | 右侧单位显示                  |
 | rightIcon | String  | 右侧图标路径                  |
 
+### Cell Slots
+
+| 名称     | 说明                        |
+| :------- | :-------------------------- |
+| default  | 自定义右侧 value 的内容     | 
+| sublabel | 自定义标题下方 label 的内容 | 
+
+
+
 ### Events
 
 | 事件名         | 说明             | 回调参数 |

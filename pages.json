@@ -112,16 +112,7 @@
         }
       }
     },
-    {
-      "path": "pages/demo/ui-demo/dialog",
-      "style": {
-        "app-plus": {
-          "titleNView": {
-            "titleText": "弹窗交互"
-          }
-        }
-      }
-    },
+
     {
       "path": "pages/demo/ui-demo/speech",
       "style": {
@@ -132,26 +123,8 @@
         }
       }
     },
-    {
-      "path": "pages/demo/ui-demo/list",
-      "style": {
-        "app-plus": {
-          "titleNView": {
-            "titleText": "list"
-          }
-        }
-      }
-    },
-    {
-      "path": "pages/demo/ui-demo/form",
-      "style": {
-        "app-plus": {
-          "titleNView": {
-            "titleText": "表单"
-          }
-        }
-      }
-    },
+
+
     {
       "path": "pages/demo/ui-demo/navbar1",
       "style": {
@@ -178,10 +151,6 @@
       "path": "pages/demo/ui-demo/navbar2"
     },
     {
-      "path": "pages/demo/ui-demo/tabs",
-      "style": {}
-    },
-    {
       "path": "pages/demo/ui-demo/search-filter",
       "style": {
         "app-plus": {
@@ -198,37 +167,11 @@
       }
     },
     {
-      "path": "pages/demo/ui-demo/swipeActionItem",
-      "style": {
-        "navigationBarTitleText": "SwipeAction 滑动操作",
-        "disableScroll": true,
-        "app-plus": {
-          "bounce": "none"
-        }
-      }
-    },
-    {
       "path": "pages/demo/ui-demo/keyWord",
       "style": {}
     },
     {
-      "path": "pages/demo/ui-demo/check-item",
-      "style": {}
-    },
-    {
-      "path": "pages/demo/ui-demo/keyboard",
-      "style": {}
-    },
-    {
       "path": "pages/demo/ui-demo/dict",
-      "style": {}
-    },
-    {
-      "path": "pages/demo/ui-demo/cell",
-      "style": {}
-    },
-    {
-      "path": "pages/demo/ui-demo/select",
       "style": {}
     },
     {
@@ -286,6 +229,13 @@
     }, {
       "path": "pages/demo/ui-demo/upload-file",
       "style": {}
+    }, {
+      "path": "pages/demo/ui-demo/base-scroll-demo",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
     }
   ],
   "globalStyle": {
